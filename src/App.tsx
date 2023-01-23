@@ -56,51 +56,54 @@ function App() {
 
   return (
     <div className="App">
-      <table>
-        <thead>
-          <tr>
-            <th>name</th>
-            <th>chanel</th>
-            <th>start attendance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <Fragment key={item.document}>
-              <tr
-                onClick={() =>
-                  item.accounts.length > 1
-                    ? handleOpenHidden(item.document)
-                    : handleSelectItem(item)
-                }
-              >
-                <td>{item.name}</td>
-                <td>{item.chanel}</td>
-                <td
-                  className={`${
-                    item.accounts.length > 1 && "menu__list-item-collapsible"
-                  }  ${item.isOpen && "is-open"}`}
+      <section className="container">
+        <h1>attendance</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>chanel</th>
+              <th>start attendance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <Fragment key={item.document}>
+                <tr
+                  onClick={() =>
+                    item.accounts.length > 1
+                      ? handleOpenHidden(item.document)
+                      : handleSelectItem(item)
+                  }
                 >
-                  {item.startAttendance}
-                </td>
-              </tr>
-
-              {item.accounts.length > 1 &&
-                item.accounts.map((account, index) => (
-                  <tr
-                    key={`${item.document}-${index}`}
-                    className={`panel ${item.isOpen ? "panel-is-open" : ""}`}
-                    onClick={() => handleSelectItem(item, index)}
+                  <td>{item.name}</td>
+                  <td>{item.chanel}</td>
+                  <td
+                    className={`${
+                      item.accounts.length > 1 && "menu__list-item-collapsible"
+                    }  ${item.isOpen && "is-open"}`}
                   >
-                    <td>{item.name}</td>
-                    <td>{account.status}</td>
-                    <td>{account.accountNumber}</td>
-                  </tr>
-                ))}
-            </Fragment>
-          ))}
-        </tbody>
-      </table>
+                    {item.startAttendance}
+                  </td>
+                </tr>
+
+                {item.accounts.length > 1 &&
+                  item.accounts.map((account, index) => (
+                    <tr
+                      key={`${item.document}-${index}`}
+                      className={`panel ${item.isOpen ? "panel-is-open" : ""}`}
+                      onClick={() => handleSelectItem(item, index)}
+                    >
+                      <td>{item.name}</td>
+                      <td>{account.status}</td>
+                      <td>{account.accountNumber}</td>
+                    </tr>
+                  ))}
+              </Fragment>
+            ))}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }

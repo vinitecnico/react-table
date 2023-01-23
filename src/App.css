@@ -1,3 +1,16 @@
+.App {
+  height: 62vh;
+  position: relative;
+}
+
+.container {
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  top: 50%;
+  position: relative;
+}
+
 table {
   font-size: 16px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
