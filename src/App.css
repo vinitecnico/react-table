@@ -56,12 +56,16 @@ table tr .is-open:after {
 }
 
 .panel {
-  display: none;
+  display: table-column;
   opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: height 0ms 400ms, opacity 400ms 0ms;
 }
 
 .panel-is-open {
-  display: table-row;
   opacity: 1;
-  transition: opacity 2s linear;
+  height: auto;
+  display: table-row;
+  transition: height 0ms 0ms, opacity 600ms 0ms;
 }
