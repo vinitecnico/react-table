@@ -50,8 +50,9 @@ function App() {
     setItems([...result]);
   };
 
-  const handleSelectItem = (selectItem: unknown, index: number = 0) =>
-    console.log("here >>>", selectItem, (selectItem as any).account[index]);
+  const handleSelectItem = (selectItem: unknown, index: number = 0) => {
+    console.log("here >>>", selectItem, (selectItem as any)?.accounts[index]);
+  };
 
   return (
     <div className="App">
