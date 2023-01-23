@@ -41,6 +41,7 @@ function App() {
   ];
 
   const [items, setItems] = useState(_items);
+
   const handleOpenHidden = (document: string) => {
     const result = items.map((item) => ({
       ...item,
@@ -48,6 +49,9 @@ function App() {
     }));
     setItems([...result]);
   };
+
+  const handleSelectItem = (selectItem: unknown, index: number = 0) =>
+    console.log("here >>>", selectItem, (selectItem as any).account[index]);
 
   return (
     <div className="App">
@@ -64,7 +68,9 @@ function App() {
             <Fragment key={item.document}>
               <tr
                 onClick={() =>
-                  item.accounts.length > 1 && handleOpenHidden(item.document)
+                  item.accounts.length > 1
+                    ? handleOpenHidden(item.document)
+                    : handleSelectItem(item)
                 }
               >
                 <td>{item.name}</td>
@@ -81,8 +87,9 @@ function App() {
               {item.accounts.length > 1 &&
                 item.accounts.map((account, index) => (
                   <tr
-                    className={`panel ${item.isOpen ? "panel-is-open" : ""}`}
                     key={`${item.document}-${index}`}
+                    className={`panel ${item.isOpen ? "panel-is-open" : ""}`}
+                    onClick={() => handleSelectItem(item, index)}
                   >
                     <td>{item.name}</td>
                     <td>{account.status}</td>

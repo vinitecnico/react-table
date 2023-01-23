@@ -37,20 +37,22 @@ table tr .menu__list-item-collapsible {
 }
 
 table tr .menu__list-item-collapsible:after {
+  position: relative;
+  top: -5px;
   content: "";
-  border: 0.5em solid transparent;
-  border-left-color: gray;
-  transform-origin: 0 50%;
-  transition: transform 0.25s;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-right: 0.2em solid #666;
+  border-top: 0.2em solid #666;
+  transform: rotate(135deg);
+  margin-right: 0.5em;
   margin-left: auto;
-  transform: rotate(90deg);
-  transition: -webkit-transform var(--ifm-transition-fast) linear;
-  transition: transform var(--ifm-transition-fast) linear,
-    -webkit-transform var(--ifm-transition-fast) linear;
 }
 
 table tr .is-open:after {
-  transform: rotate(270deg);
+  top: 5px;
+  transform: rotate(-45deg);
 }
 
 .panel {
