@@ -1,14 +1,20 @@
 .App {
-  height: 62vh;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-  margin: auto;
   width: 60%;
   text-align: center;
-  top: 50%;
-  position: relative;
+}
+
+@media (max-width: 1250px) {
+  .container {
+    width: 80%;
+    text-align: center;
+  }
 }
 
 table {
