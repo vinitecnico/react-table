@@ -1,46 +1,10 @@
 import React, { Fragment, useState } from "react";
+import mockItem from "./mock";
 import "./App.css";
+import NavBar from "./NavBar";
 
 function App() {
-  const _items = [
-    {
-      document: "111111111",
-      name: "jonny",
-      chanel: "chat",
-      startAttendance: "10:30",
-      email: "jonny@test.com",
-      isOpen: false,
-      accounts: [
-        {
-          status: "normal",
-          description: "",
-          accountNumber: "222222222",
-        },
-        {
-          status: "full canceled",
-          description: "account cancelation",
-          accountNumber: "222222223",
-        },
-      ],
-    },
-    {
-      document: "222222222",
-      name: "Anny",
-      chanel: "phone",
-      startAttendance: "10:25",
-      email: "jonny@test.com",
-      isOpen: false,
-      accounts: [
-        {
-          status: "normal",
-          description: "",
-          accountNumber: "222222222",
-        },
-      ],
-    },
-  ];
-
-  const [items, setItems] = useState(_items);
+  const [items, setItems] = useState(mockItem);
 
   const handleOpenHidden = (document: string) => {
     const result = items.map((item) => ({
@@ -56,54 +20,60 @@ function App() {
 
   return (
     <div className="App">
-      <section className="container">
-        <h1>attendance</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>name</th>
-              <th>chanel</th>
-              <th>start attendance</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <Fragment key={item.document}>
-                <tr
-                  onClick={() =>
-                    item.accounts.length > 1
-                      ? handleOpenHidden(item.document)
-                      : handleSelectItem(item)
-                  }
-                >
-                  <td>{item.name}</td>
-                  <td>{item.chanel}</td>
-                  <td
-                    className={`${
-                      item.accounts.length > 1 && "menu__list-item-collapsible"
-                    }  ${item.isOpen && "is-open"}`}
+      <NavBar />
+      <section className="wrapper">
+        <article className="container">
+          <h1>attendance</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>name</th>
+                <th>chanel</th>
+                <th>start attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <Fragment key={item.document}>
+                  <tr
+                    onClick={() =>
+                      item.accounts.length > 1
+                        ? handleOpenHidden(item.document)
+                        : handleSelectItem(item)
+                    }
                   >
-                    {item.startAttendance}
-                  </td>
-                </tr>
-
-                {item.accounts.length > 1 &&
-                  item.accounts.map((account, index) => (
-                    <tr
-                      key={`${item.document}-${index}`}
-                      className={`panel ${item.isOpen ? "panel-is-open" : ""}`}
-                      onClick={() => handleSelectItem(item, index)}
+                    <td>{item.name}</td>
+                    <td>{item.chanel}</td>
+                    <td
+                      className={`${
+                        item.accounts.length > 1 &&
+                        "menu__list-item-collapsible"
+                      }  ${item.isOpen && "is-open"}`}
                     >
-                      <td>{item.name}</td>
-                      <td>{account.status}</td>
-                      <td>{account.accountNumber}</td>
-                    </tr>
-                  ))}
-              </Fragment>
-            ))}
-          </tbody>
-        </table>
-        <h5>description</h5>
+                      {item.startAttendance}
+                    </td>
+                  </tr>
+
+                  {item.accounts.length > 1 &&
+                    item.accounts.map((account, index) => (
+                      <tr
+                        key={`${item.document}-${index}`}
+                        className={`panel ${
+                          item.isOpen ? "panel-is-open" : ""
+                        }`}
+                        onClick={() => handleSelectItem(item, index)}
+                      >
+                        <td>{item.name}</td>
+                        <td>{account.status}</td>
+                        <td>{account.accountNumber}</td>
+                      </tr>
+                    ))}
+                </Fragment>
+              ))}
+            </tbody>
+          </table>
+          <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</h5>
+        </article>
       </section>
     </div>
   );
