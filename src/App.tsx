@@ -1,10 +1,36 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import mockItem from "./mock";
 import "./App.css";
 import NavBar from "./NavBar";
 
 function App() {
   const [items, setItems] = useState(mockItem);
+  const [connection, setConnection] = useState<HubConnection>();
+
+  useEffect(() => {
+    const newConnection = new HubConnectionBuilder()
+      .withUrl("http://localhost:5014/chatHub")
+      .withAutomaticReconnect()
+      .build();
+
+    setConnection(newConnection);
+  }, []);
+
+  useEffect(() => {
+    if (connection) {
+      connection
+        .start()
+        .then((result) => {
+          console.log("Connected!");
+
+          connection.on("ReceiveMessage", (message) => {
+            console.log('here >>>', message)
+          });
+        })
+        .catch((e) => console.log("Connection failed: ", e));
+    }
+  }, [connection]);
 
   const handleOpenHidden = (document: string) => {
     const result = items.map((item) => ({
@@ -72,7 +98,11 @@ function App() {
               ))}
             </tbody>
           </table>
-          <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</h5>
+          <h5>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley
+          </h5>
         </article>
       </section>
     </div>
